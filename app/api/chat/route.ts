@@ -64,34 +64,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-}
-    }
-
-    const lastMessage = history[history.length - 1];
-    const userPrompt = lastMessage.content;
-
-    const geminiHistory: Content[] = history
-      .slice(0, -1)
-      .map((msg) => ({
-        role: msg.role === "assistant" ? "model" : "user",
-        parts: [{ text: msg.content }],
-      }));
-
-    const chat = model.startChat({
-      history: geminiHistory,
-    });
-
-    const result = await chat.sendMessage(userPrompt);
-    const response = result.response;
-    const text = response.text();
-
-    return NextResponse.json({ reply: text });
-  } catch (error) {
-    console.error("Error di API chat:", error);
-    return NextResponse.json(
-      { error: "Terjadi kesalahan di server" },
-      { status: 500 }
-    );
-  }
-  }
-        
+      }

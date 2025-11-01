@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, Content } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
 const nephyyPersona = `
@@ -20,19 +20,37 @@ const model = genAI.getGenerativeModel({
   systemInstruction: nephyyPersona,
 });
 
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json();
+    const { history } = (await req.json()) as { history: Message[] };
 
-    if (!message) {
+    if (!history || history.length === 0) {
       return NextResponse.json(
-        { error: "Pesan tidak boleh kosong" },
+        { error: "Riwayat pesan tidak boleh kosong" },
         { status: 400 }
       );
     }
 
-    const chat = model.startChat();
-    const result = await chat.sendMessage(message);
+    const lastMessage = history[history.length - 1];
+    const userPrompt = lastMessage.content;
+
+    const geminiHistory: Content[] = history
+      .slice(0, -1)
+      .map((msg) => ({
+        role: msg.role === "assistant" ? "model" : "user",
+        parts: [{ text: msg.content }],
+      }));
+
+    const chat = model.startChat({
+      history: geminiHistory,
+    });
+
+    const result = await chat.sendMessage(userPrompt);
     const response = result.response;
     const text = response.text();
 
@@ -44,5 +62,5 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-}
-  
+  }
+        

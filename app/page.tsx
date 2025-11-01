@@ -1,45 +1,99 @@
+"use client"
+
+import React, { useState, FormEvent, ChangeEvent, useRef, useEffect } from "react";
 import { Sidebar } from "@/components/sidebar";
 import { ChatHeader } from "@/components/chat-header";
 import { ChatInputBar } from "@/components/chat-input-bar";
 import { ChatEmptyState } from "@/components/chat-empty-state";
-// Impor ChatMessage jika Anda sudah memiliki data untuk ditampilkan
-// import { ChatMessage } from "@/components/chat-message";
+import { ChatMessage } from "@/components/chat-message";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
 
 export default function Home() {
-  // Nanti, Anda akan memuat riwayat obrolan di sini
-  // const messages = []; // Contoh data kosong
-  const messages: any[] = []; // Kita set kosong untuk menampilkan EmptyState
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+
+    const userMessage: Message = { role: "user", content: inputValue };
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: inputValue }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Gagal mendapat respons dari server :(");
+      }
+
+      const data = await response.json();
+      const aiMessage: Message = { role: "assistant", content: data.reply };
+      setMessages((prev) => [...prev, aiMessage]);
+
+    } catch (error) {
+      console.error(error);
+      const errorMessage: Message = {
+        role: "assistant",
+        content: "Aduh, maaf T_T Kayaknya ada yang error... coba lagi yaa?",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
 
   return (
     <main className="flex h-screen w-full bg-background">
-      {/* 1. Sidebar Kiri (Desktop) */}
       <Sidebar />
 
-      {/* 2. Area Chat Utama (Header, Konten, Input) */}
       <div className="flex flex-1 flex-col h-screen">
-        
-        {/* Header Area Chat */}
         <ChatHeader />
 
-        {/* Area Riwayat Chat */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+        <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
           {messages.length === 0 ? (
             <ChatEmptyState />
           ) : (
             messages.map((msg, index) => (
-              // <ChatMessage 
-              //   key={index} 
-              //   role={msg.role} 
-              //   content={msg.content} 
-              // />
-              null // Placeholder
+              <ChatMessage 
+                key={index} 
+                role={msg.role} 
+                content={msg.content} 
+              />
             ))
           )}
         </div>
 
-        {/* Input Bar (Footer) */}
-        <ChatInputBar />
-        
+        <ChatInputBar 
+          inputValue={inputValue}
+          onInputChange={handleInputChange}
+          onSubmit={handleSubmit}
+          isLoading={isLoading}
+        />
       </div>
     </main>
   );

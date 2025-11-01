@@ -1,6 +1,6 @@
 import React from 'react'
 import { MobileSidebar } from "@/components/mobile-sidebar"
-import { Settings } from "lucide-react"
+import { Settings, CheckBadge } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function ChatHeader() {
@@ -8,9 +8,14 @@ export function ChatHeader() {
     <header className="sticky top-0 z-10 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-background/95 backdrop-blur-sm">
       <div className="flex items-center">
         <MobileSidebar />
-        <h2 className="ml-2 text-lg font-semibold">
-          General Assistant
-        </h2>
+        
+        <div className="ml-2 flex items-center space-x-1.5">
+          <h2 className="text-lg font-semibold">
+            NephyyAI
+          </h2>
+          <CheckBadge className="w-4 h-4 text-blue-500 fill-blue-500" />
+        </div>
+
       </div>
       
       <div className="flex items-center space-x-2">

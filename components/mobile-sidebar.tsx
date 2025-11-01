@@ -7,17 +7,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
-import { Sidebar } from "@/components/sidebar" // Kita akan render ulang konten sidebar
+import { Separator } from "@/components/ui/separator"
+import { Menu, Plus, Bot, Code, Sparkles } from "lucide-react"
 
-// Ubah Sidebar agar bisa menerima props untuk menutup drawer
 function SidebarContent({ onClose }: { onClose?: () => void }) {
-  // Versi modifikasi dari konten sidebar.tsx untuk mobile
-  // Di sini kita akan membuat versi yang sedikit berbeda untuk mobile
-  // atau kita bisa memodifikasi sidebar.tsx untuk menerima props
-  
-  // Untuk kesederhanaan, kita akan buat ulang versi mobile di sini
-  // yang memanggil onClose saat item diklik (jika perlu)
   
   return (
     <div className="flex flex-col h-full p-4 space-y-4 bg-background">

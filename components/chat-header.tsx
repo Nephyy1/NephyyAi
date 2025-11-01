@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export function ChatHeader() {
   return (
-    <header className="sticky top-0 z-10 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-background/95 backdrop-blur-sm">
+    <header className="flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-background">
       <div className="flex items-center">
         <MobileSidebar />
         
@@ -13,7 +13,7 @@ export function ChatHeader() {
           <h2 className="text-lg font-semibold">
             NephyyAI
           </h2>
-          <BadgeCheck className="w-4 h-4 text-blue-500 fill-blue-500" />
+          <BadgeCheck className="w-4 h-4" />
         </div>
 
       </div>

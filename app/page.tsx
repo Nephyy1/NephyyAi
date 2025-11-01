@@ -30,7 +30,9 @@ export default function Home() {
     if (!inputValue.trim()) return;
 
     const userMessage: Message = { role: "user", content: inputValue };
-    setMessages((prev) => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    
+    setMessages(newMessages);
     setInputValue("");
     setIsLoading(true);
 
@@ -40,7 +42,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: inputValue }),
+        body: JSON.stringify({ history: newMessages }),
       });
 
       if (!response.ok) {
@@ -97,4 +99,5 @@ export default function Home() {
       </div>
     </main>
   );
-}
+    }
+                                  

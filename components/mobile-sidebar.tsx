@@ -67,7 +67,6 @@ export function MobileSidebar() {
           </Button>
         </DialogTrigger>
         <DialogContent 
-          side="left" 
           className="p-0 m-0 w-72 h-screen max-w-xs sm:max-w-xs
                      fixed left-0 top-0 
                      translate-x-0 translate-y-0
@@ -79,4 +78,4 @@ export function MobileSidebar() {
       </Dialog>
     </div>
   )
-}
+          }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { MobileSidebar } from "@/components/mobile-sidebar"
-import { Settings, CheckBadge } from "lucide-react"
+import { Settings, BadgeCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function ChatHeader() {
@@ -13,7 +13,7 @@ export function ChatHeader() {
           <h2 className="text-lg font-semibold">
             NephyyAI
           </h2>
-          <CheckBadge className="w-4 h-4 text-blue-500 fill-blue-500" />
+          <BadgeCheck className="w-4 h-4 text-blue-500 fill-blue-500" />
         </div>
 
       </div>

@@ -1,11 +1,17 @@
 import React from 'react'
-import { Sparkles } from "lucide-react"
+import Image from 'next/image'
 
 export function ChatEmptyState() {
   return (
     <div className="flex flex-col items-center justify-center h-full p-4 text-center">
-      <div className="mb-4 p-4 rounded-full bg-gradient-to-br from-soft-teal-foreground/10 to-soft-lavender-foreground/10">
-        <Sparkles className="w-12 h-12 text-transparent bg-clip-text bg-gradient-to-r from-soft-teal to-soft-lavender" strokeWidth={1.5} />
+      <div className="mb-4 p-1 rounded-full bg-gradient-to-br from-soft-teal-foreground/10 to-soft-lavender-foreground/10">
+        <Image
+          src="/profile/nephyy.gif"
+          alt="Nephyy Profile"
+          width={80}
+          height={80}
+          className="rounded-full object-cover"
+        />
       </div>
       <h2 className="text-2xl font-semibold mb-2">
         Hello! I am NephyyAI.

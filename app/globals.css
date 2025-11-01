@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 84.2% 4.9%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(222.2 84.2% 4.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 84.2% 4.9%);
+    
+    /* Warna Aksen - Kita set 'soft-teal' sebagai primary */
+    --primary: hsl(170, 60%, 65%);
+    --primary-foreground: hsl(170, 30%, 20%);
+    
+    --secondary: hsl(210 40% 96.1%);
+    --secondary-foreground: hsl(222.2 47.4% 11.2%);
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(210 40% 86.1%);
+    
+    /* Warna Aksen lain (jika diperlukan) */
+    --accent: hsl(210 40% 96.1%);
+    --accent-foreground: hsl(222.2 47.4% 11.2%);
+    
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(210 40% 98%);
+    
+    /* Variabel untuk efek 3D */
+    --border: hsl(214.3 31.8% 91.4%);
+    --input: hsl(214.3 31.8% 91.4%);
+    --ring: hsl(170, 60%, 65%); /* Menggunakan warna aksen untuk ring */
+    
+    --radius: 0.75rem; /* Sedikit lebih bulat untuk estetika 'soft' */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 const config = {
   darkMode: ["class"],
@@ -52,19 +52,19 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'soft-teal': {
+          DEFAULT: "hsl(170, 60%, 65%)",
+          foreground: "hsl(170, 30%, 20%)",
+        },
+        'soft-lavender': {
+          DEFAULT: "hsl(250, 60%, 75%)",
+          foreground: "hsl(250, 30%, 20%)",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-      },
-      boxShadow: {
-        "3d-light": "0 4px 10px -2px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.04)",
-        "3d-medium": "0 10px 25px -5px rgba(27, 139, 153, 0.1), 0 6px 10px -6px rgba(27, 139, 153, 0.1)",
-      },
-      backgroundImage: {
-        'hero-gradient': 'radial-gradient(ellipse at 70% 30%, hsl(45, 100%, 99%), hsl(var(--background)) 70%)',
-        'button-gradient': 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(188, 70%, 55%) 100%)',
       },
       keyframes: {
         "accordion-down": {
@@ -80,9 +80,15 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      boxShadow: {
+        'soft-light-3d': '5px 5px 12px #e6e6e6, -5px -5px 12px #ffffff',
+        'input-light': '0px 2px 8px rgba(0, 0, 0, 0.05)',
+        'bubble-ai': '4px 4px 10px rgba(0, 0, 0, 0.06)',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+} satisfies Config
 
-export default config;
+export default config
+		  

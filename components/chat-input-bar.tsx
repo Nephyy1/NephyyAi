@@ -20,7 +20,7 @@ export function ChatInputBar({
 }: ChatInputBarProps) {
 
   return (
-    <footer className="sticky bottom-0 z-10 w-full p-4 border-t bg-background/95 backdrop-blur-sm">
+    <footer className="w-full p-4 border-t bg-background">
       <form 
         onSubmit={onSubmit} 
         className="relative flex w-full max-w-4xl mx-auto items-center"

@@ -1,8 +1,9 @@
 "use client"
 
 import React from 'react'
+import Image from 'next/image'
 import { cn } from "@/lib/utils"
-import { User, Bot } from "lucide-react"
+import { User } from "lucide-react"
 
 interface ChatMessageProps {
   role: "user" | "assistant";
@@ -19,9 +20,13 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
     )}>
       
       {!isUser && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-          <Bot className="w-5 h-5 text-primary-foreground" />
-        </div>
+        <Image
+          src="/profile/nephyy.gif"
+          alt="Nephyy Profile"
+          width={32}
+          height={32}
+          className="flex-shrink-0 rounded-full object-cover"
+        />
       )}
 
       <div className={cn(

@@ -5,15 +5,13 @@ import Image from 'next/image'
 import { cn } from "@/lib/utils"
 import { User } from "lucide-react"
 import ReactMarkdown from "react-markdown"
-import { AiBarChart } from "@/components/ai-bar-chart"
 
 interface ChatMessageProps {
   role: "user" | "assistant";
   content: string;
-  chartData?: any;
 }
 
-export function ChatMessage({ role, content, chartData }: ChatMessageProps) {
+export function ChatMessage({ role, content }: ChatMessageProps) {
   const isUser = role === "user";
 
   return (
@@ -49,10 +47,6 @@ export function ChatMessage({ role, content, chartData }: ChatMessageProps) {
         >
           {content}
         </ReactMarkdown>
-
-        {chartData && (
-          <AiBarChart data={chartData} />
-        )}
       </div>
 
       {isUser && (
@@ -64,3 +58,4 @@ export function ChatMessage({ role, content, chartData }: ChatMessageProps) {
     </div>
   )
 }
+        

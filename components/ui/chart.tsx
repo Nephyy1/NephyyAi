@@ -28,10 +28,23 @@ import {
 
 import { cn } from "@/lib/utils"
 
+export type ChartConfig = Record<
+  string,
+  {
+    label: React.ReactNode
+    color: string
+    icon?: React.ComponentType
+    labelList?: {
+      position?: "top" | "bottom" | "left" | "right" | "center"
+      offset?: number
+    }
+  }
+>
+
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    config: Record<string, any>
+    config: ChartConfig
     children: React.ReactElement<any, string | React.JSXElementConstructor<any>>
   }
 >(({ id, className, children, config, ...props }, ref) => {
@@ -101,7 +114,7 @@ const ChartStyle = ({
   config,
 }: {
   id: string
-  config: Record<string, any>
+  config: ChartConfig
 }) => {
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -172,4 +185,3 @@ export {
   YAxis,
   Legend,
   }
-    

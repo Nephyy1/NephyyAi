@@ -71,7 +71,6 @@ const BarChart = React.forwardRef<
         ref={ref}
         config={config}
         className={cn("h-full w-full", className)}
-        onMouseLeave={() => setActiveChart(undefined)}
         {...props}
       >
         <ChartStyle id={props.id ?? "chart"} config={config} />
@@ -181,3 +180,4 @@ const BarChart = React.forwardRef<
 BarChart.displayName = "BarChart"
 
 export { BarChart }
+                                   

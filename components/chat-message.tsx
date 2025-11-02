@@ -31,10 +31,10 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
       )}
 
       <div className={cn(
-        "p-4 rounded-xl max-w-[85%] text-sm text-foreground/90 break-words",
+        "p-4 rounded-xl max-w-[85%] text-sm break-words",
         isUser
-          ? "bg-background rounded-br-none shadow-soft-light-3d border border-border/70"
-          : "bg-gradient-to-br from-white to-primary/10 rounded-bl-none shadow-bubble-ai border border-border/50"
+          ? "bg-muted text-foreground rounded-br-none"
+          : "bg-primary text-primary-foreground rounded-bl-none"
       )}>
         <ReactMarkdown 
           components={{
@@ -43,8 +43,8 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
             h3: (props) => <h3 className="text-sm font-semibold mb-1" {...props} />,
             strong: (props) => <strong className="font-semibold" {...props} />,
             p: (props) => <p className="mb-2 last:mb-0" {...props} />,
-            pre: (props) => <pre className="p-3 my-2 bg-muted/50 rounded-md whitespace-pre-wrap break-words" {...props} />,
-            code: (props) => <code className="font-mono text-sm bg-muted/50 px-1 py-0.5 rounded" {...props} />
+            pre: (props) => <pre className="p-3 my-2 bg-black/10 rounded-md whitespace-pre-wrap break-words" {...props} />,
+            code: (props) => <code className="font-mono text-sm bg-black/10 px-1 py-0.5 rounded" {...props} />
           }}
         >
           {content}
@@ -59,5 +59,5 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
 
     </div>
   )
-      }
-            
+}
+                             

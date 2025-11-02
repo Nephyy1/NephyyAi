@@ -6,6 +6,7 @@ import { ChatHeader } from "@/components/chat-header";
 import { ChatInputBar } from "@/components/chat-input-bar";
 import { ChatEmptyState } from "@/components/chat-empty-state";
 import { ChatMessage } from "@/components/chat-message";
+import { ChatLoadingIndicator } from "@/components/chat-loading-indicator";
 
 interface Message {
   role: "user" | "assistant";
@@ -23,7 +24,7 @@ export default function Home() {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -88,6 +89,10 @@ export default function Home() {
               />
             ))
           )}
+          
+          {isLoading && (
+            <ChatLoadingIndicator />
+          )}
         </div>
 
         <ChatInputBar 
@@ -99,5 +104,4 @@ export default function Home() {
       </div>
     </main>
   );
-    }
-                                  
+}

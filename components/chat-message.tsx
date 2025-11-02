@@ -31,13 +31,12 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
       )}
 
       <div className={cn(
-        "p-4 rounded-xl max-w-[75%]",
+        "p-4 rounded-xl max-w-[75%] text-sm text-foreground/90 whitespace-pre-wrap",
         isUser
           ? "bg-background rounded-br-none shadow-soft-light-3d border border-border/70"
           : "bg-gradient-to-br from-white to-primary/10 rounded-bl-none shadow-bubble-ai border border-border/50"
       )}>
         <ReactMarkdown 
-          className="text-sm text-foreground/90"
           components={{
             h1: (props) => <h1 className="text-lg font-semibold mb-2" {...props} />,
             h2: (props) => <h2 className="text-base font-semibold mb-2" {...props} />,
@@ -59,3 +58,4 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
     </div>
   )
 }
+      

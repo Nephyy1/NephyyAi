@@ -13,7 +13,7 @@ import { Menu, Plus, Bot, Code, Sparkles } from "lucide-react"
 function SidebarContent({ onClose }: { onClose?: () => void }) {
   
   return (
-    <div className="flex flex-col h-full p-4 space-y-4 bg-white">
+    <div className="flex flex-col h-full p-4 space-y-4 bg-background">
       <div className="flex items-center justify-between pb-2">
         <h2 className="text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-soft-teal-foreground to-soft-lavender-foreground">
           NephyyAI
@@ -22,7 +22,7 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
       
       <Button 
         variant="outline" 
-        className="w-full justify-start text-base font-medium shadow-input-light border-border/60"
+        className="w-full justify-start text-base font-medium border-border/60"
         onClick={onClose}
       >
         <Plus className="w-4 h-4 mr-3" />
@@ -79,4 +79,3 @@ export function MobileSidebar() {
     </div>
   )
 }
-          

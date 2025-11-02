@@ -1,7 +1,7 @@
 import React from 'react'
 import { MobileSidebar } from "@/components/mobile-sidebar"
-import { Settings, BadgeCheck } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { BadgeCheck } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function ChatHeader() {
   return (
@@ -19,9 +19,7 @@ export function ChatHeader() {
       </div>
       
       <div className="flex items-center space-x-2">
-        <Button variant="ghost" size="icon">
-          <Settings className="w-5 h-5" />
-        </Button>
+        <ThemeToggle />
       </div>
     </header>
   )

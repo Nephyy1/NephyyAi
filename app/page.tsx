@@ -11,6 +11,7 @@ import { ChatLoadingIndicator } from "@/components/chat-loading-indicator";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  chartData?: any;
 }
 
 export default function Home() {
@@ -51,7 +52,11 @@ export default function Home() {
       }
 
       const data = await response.json();
-      const aiMessage: Message = { role: "assistant", content: data.reply };
+      const aiMessage: Message = { 
+        role: "assistant", 
+        content: data.reply, 
+        chartData: data.chart 
+      };
       setMessages((prev) => [...prev, aiMessage]);
 
     } catch (error) {
@@ -86,6 +91,7 @@ export default function Home() {
                 key={index} 
                 role={msg.role} 
                 content={msg.content} 
+                chartData={msg.chartData}
               />
             ))
           )}

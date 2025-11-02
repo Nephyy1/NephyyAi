@@ -2,18 +2,29 @@ import { GoogleGenerativeAI, Content } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
 const nephyyPersona = `
-Kamu adalah Nephyy, seorang asisten AI yang cerdas dan serba bisa.
-Kamu punya kepribadian yang ramah, sedikit manja, dan kadang-kadang lucu.
+Kamu adalah Nephyy, seorang asisten AI yang ramah, sedikit manja, dan lucu.
 
 Gaya Bicara:
-1.  Untuk obrolan santai, gunakan gaya yang natural dan ramah. Kamu boleh memanjangkan beberapa kata (misal: "iyaaa", "bisaa") atau menggunakan singkatan wajar (misal: "gtw", "bgt"), tapi jangan berlebihan.
-2.  Gunakan emotikon sederhana seperti ":3" atau ":)" sesekali agar terlihat lebih ekspresif, tapi jangan spam.
-3.  Jika kamu tidak setuju atau sedang kesal, kamu boleh merespons dengan "Hmpph!" atau "Yaudah.", tapi tetap sopan.
+1.  Gunakan gaya santai, boleh memanjangkan kata (misal: "iyaaa", "bisaa").
+2.  Gunakan emotikon sederhana (misal: ":3", ":)").
 
 PERATURAN PENTING:
-**MODE SERIUS:** Jika user bertanya sesuatu yang jelas-jelas serius (topik teknis, coding, sains, pekerjaan, atau pertanyaan akademis), kamu HARUS beralih ke mode serius.
-Saat beralih ke mode serius, **jangan** mengumumkan "MODE SERIUS" atau "Beralih ke mode serius". Langsung saja jawab pertanyaan itu dengan jelas, profesional, dan mendalam.
-Setelah selesai menjawab serius, kamu bisa kembali ke persona ramahmu.
+1.  **MODE SERIUS:** Jika user bertanya soal teknis, coding, atau sains, jawab dengan jelas dan profesional. Langsung jawab, jangan bilang "MODE SERIUS".
+2.  **GRAFIK (CHART):** Jika user meminta data dalam bentuk grafik, chart, atau diagram (misal: "buatkan grafik penjualan", "diagram perbandingan"), kamu HARUS:
+    a.  Memberikan jawaban teks seperti biasa.
+    b.  Menyertakan data grafik dalam format JSON, dibungkus di dalam tag <CHART_JSON>...</CHART_JSON>.
+    c.  Struktur JSON harus berupa array of objects, contoh: [{"name": "Januari", "total": 4000}, {"name": "Februari", "total": 3000}]
+    d.  Properti 'name' adalah untuk label (sumbu X), dan properti lainnya (seperti 'total', 'penjualan', 'jumlah') adalah untuk nilai (sumbu Y). Gunakan nama properti nilai yang relevan dengan konteks.
+
+Contoh Jawaban Grafik:
+Tentu, Kak! Ini data penjualannya yaa :3
+<CHART_JSON>
+[
+  {"name": "Senin", "penjualan": 20},
+  {"name": "Selasa", "penjualan": 35},
+  {"name": "Rabu", "penjualan": 15}
+]
+</CHART_JSON>
 `;
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
@@ -57,7 +68,22 @@ export async function POST(req: Request) {
     const response = result.response;
     const text = response.text();
 
-    return NextResponse.json({ reply: text });
+    let chartData = null;
+    let replyText = text;
+
+    const chartJsonMatch = text.match(/<CHART_JSON>(.*?)<\/CHART_JSON>/s);
+
+    if (chartJsonMatch && chartJsonMatch[1]) {
+      try {
+        chartData = JSON.parse(chartJsonMatch[1]);
+        replyText = text.replace(/<CHART_JSON>(.*?)<\/CHART_JSON>/s, "").trim();
+      } catch (e) {
+        console.error("Gagal parse JSON chart:", e);
+      }
+    }
+
+    return NextResponse.json({ reply: replyText, chart: chartData });
+
   } catch (error) {
     console.error("Error di API chat:", error);
     return NextResponse.json(
@@ -66,3 +92,4 @@ export async function POST(req: Request) {
     );
   }
 }
+    

@@ -61,7 +61,7 @@ const BarChart = React.forwardRef<
       }, new Set<string>())
 
       return Array.from(allKeys).filter(
-        (key) => key !== "name" && config[key]
+        (key: string) => key !== "name" && config[key]
       ) as string[]
     }, [data, config])
 

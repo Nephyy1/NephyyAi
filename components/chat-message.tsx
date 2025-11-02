@@ -42,7 +42,9 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
             h2: (props) => <h2 className="text-base font-semibold mb-2" {...props} />,
             h3: (props) => <h3 className="text-sm font-semibold mb-1" {...props} />,
             strong: (props) => <strong className="font-semibold" {...props} />,
-            p: (props) => <p className="mb-2 last:mb-0" {...props} />
+            p: (props) => <p className="mb-2 last:mb-0" {...props} />,
+            pre: (props) => <pre className="p-3 my-2 bg-muted/50 rounded-md whitespace-pre-wrap break-words" {...props} />,
+            code: (props) => <code className="font-mono text-sm bg-muted/50 px-1 py-0.5 rounded" {...props} />
           }}
         >
           {content}
@@ -58,4 +60,3 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
     </div>
   )
 }
-        

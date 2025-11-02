@@ -71,12 +71,12 @@ export async function POST(req: Request) {
     let chartData = null;
     let replyText = text;
 
-    const chartJsonMatch = text.match(/<CHART_JSON>(.*?)<\/CHART_JSON>/s);
+    const chartJsonMatch = text.match(/<CHART_JSON>([\s\S]*?)<\/CHART_JSON>/);
 
     if (chartJsonMatch && chartJsonMatch[1]) {
       try {
         chartData = JSON.parse(chartJsonMatch[1]);
-        replyText = text.replace(/<CHART_JSON>(.*?)<\/CHART_JSON>/s, "").trim();
+        replyText = text.replace(/<CHART_JSON>([\s\S]*?)<\/CHART_JSON>/, "").trim();
       } catch (e) {
         console.error("Gagal parse JSON chart:", e);
       }
@@ -92,4 +92,4 @@ export async function POST(req: Request) {
     );
   }
 }
-        
+    

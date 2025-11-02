@@ -33,8 +33,8 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
       <div className={cn(
         "p-4 rounded-xl max-w-[85%] text-sm text-foreground/90 break-words",
         isUser
-          ? "bg-background rounded-br-none shadow-soft-light-3d border border-border/70"
-          : "bg-gradient-to-br from-white to-primary/10 rounded-bl-none shadow-bubble-ai border border-border/50"
+          ? "bg-background rounded-br-none border border-border/70 shadow-soft-light-3d dark:shadow-none"
+          : "bg-gradient-to-br from-white to-primary/10 rounded-bl-none shadow-bubble-ai border border-border/50 dark:from-muted/50 dark:to-primary/10"
       )}>
         <ReactMarkdown 
           components={{

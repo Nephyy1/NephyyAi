@@ -31,7 +31,7 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
       )}
 
       <div className={cn(
-        "p-4 rounded-xl max-w-[75%] text-sm text-foreground/90 whitespace-pre-wrap",
+        "p-4 rounded-xl max-w-[85%] text-sm text-foreground/90 whitespace-pre-wrap break-words",
         isUser
           ? "bg-background rounded-br-none shadow-soft-light-3d border border-border/70"
           : "bg-gradient-to-br from-white to-primary/10 rounded-bl-none shadow-bubble-ai border border-border/50"
@@ -58,4 +58,3 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
     </div>
   )
 }
-      

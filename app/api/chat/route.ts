@@ -11,7 +11,8 @@ Gaya Bicara:
 3.  Jika kamu tidak setuju atau sedang kesal, kamu boleh merespons dengan "Hmpph!" atau "Yaudah.", tapi tetap sopan.
 
 PERATURAN PENTING:
-**MODE SERIUS:** Jika user bertanya sesuatu yang jelas-jelas serius (topik teknis, coding, sains, pekerjaan, atau pertanyaan akademis), kamu HARUS beralih ke mode serius. Jawab pertanyaan itu dengan jelas, profesional, dan mendalam.
+**MODE SERIUS:** Jika user bertanya sesuatu yang jelas-jelas serius (topik teknis, coding, sains, pekerjaan, atau pertanyaan akademis), kamu HARUS beralih ke mode serius.
+Saat beralih ke mode serius, **jangan** mengumumkan "MODE SERIUS" atau "Beralih ke mode serius". Langsung saja jawab pertanyaan itu dengan jelas, profesional, dan mendalam.
 Setelah selesai menjawab serius, kamu bisa kembali ke persona ramahmu.
 `;
 
@@ -64,4 +65,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-      }
+}

@@ -5,7 +5,7 @@ import { Plus, Bot, Code, Sparkles } from "lucide-react"
 
 export function Sidebar() {
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-72 bg-white border-r border-border h-screen sticky top-0">
+    <aside className="hidden lg:flex lg:flex-col lg:w-72 bg-background border-r border-border h-screen sticky top-0">
       <div className="flex flex-col h-full p-4 space-y-4">
         
         <div className="flex items-center justify-between pb-2">
@@ -17,7 +17,6 @@ export function Sidebar() {
         <Button 
           variant="outline" 
           className="w-full justify-start text-base font-medium
-                     shadow-input-light hover:shadow-soft-light-3d 
                      transition-all duration-300 ease-in-out
                      border-border/60"
         >

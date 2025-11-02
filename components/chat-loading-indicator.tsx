@@ -21,7 +21,7 @@ export function ChatLoadingIndicator() {
       />
 
       <div className={cn(
-        "p-4 rounded-xl max-w-[85%] text-sm text-foreground/90 break-words",
+        "p-4 rounded-xl max-w-[85%] text-sm text-foreground/90 whitespace-pre-wrap break-words",
         "bg-gradient-to-br from-white to-primary/10 rounded-bl-none shadow-bubble-ai border border-border/50"
       )}>
         <div className="flex items-center space-x-2">
@@ -32,4 +32,3 @@ export function ChatLoadingIndicator() {
     </div>
   )
 }
-      

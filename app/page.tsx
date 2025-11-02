@@ -1,4 +1,4 @@
-"use client"
+ "use client"
 
 import React, { useState, FormEvent, ChangeEvent, useRef, useEffect } from "react";
 import { Sidebar } from "@/components/sidebar";
@@ -11,7 +11,6 @@ import { ChatLoadingIndicator } from "@/components/chat-loading-indicator";
 interface Message {
   role: "user" | "assistant";
   content: string;
-  chartData?: any;
 }
 
 export default function Home() {
@@ -52,11 +51,7 @@ export default function Home() {
       }
 
       const data = await response.json();
-      const aiMessage: Message = { 
-        role: "assistant", 
-        content: data.reply, 
-        chartData: data.chart 
-      };
+      const aiMessage: Message = { role: "assistant", content: data.reply };
       setMessages((prev) => [...prev, aiMessage]);
 
     } catch (error) {
@@ -91,7 +86,6 @@ export default function Home() {
                 key={index} 
                 role={msg.role} 
                 content={msg.content} 
-                chartData={msg.chartData}
               />
             ))
           )}
@@ -111,3 +105,4 @@ export default function Home() {
     </main>
   );
 }
+     

@@ -10,12 +10,14 @@ import { ChatLoadingIndicator } from "@/components/chat-loading-indicator";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  imageBase64?: string;
 }
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageMode, setIsImageMode] = useState(false);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +44,10 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ history: newMessages }),
+        body: JSON.stringify({ 
+          history: newMessages, 
+          isImageMode: isImageMode 
+        }),
       });
 
       if (!response.ok) {
@@ -50,7 +55,21 @@ export default function Home() {
       }
 
       const data = await response.json();
-      const aiMessage: Message = { role: "assistant", content: data.reply };
+      
+      let aiMessage: Message;
+      if (data.imageBase64) {
+        aiMessage = { 
+          role: "assistant", 
+          content: `Gambar yang Anda minta: "${userMessage.content}"`,
+          imageBase64: data.imageBase64 
+        };
+      } else {
+        aiMessage = { 
+          role: "assistant", 
+          content: data.reply || "Maaf, terjadi kesalahan saat memproses permintaan." 
+        };
+      }
+      
       setMessages((prev) => [...prev, aiMessage]);
 
     } catch (error) {
@@ -62,6 +81,7 @@ export default function Home() {
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
+      setIsImageMode(false);
     }
   };
 
@@ -83,6 +103,7 @@ export default function Home() {
                 key={index} 
                 role={msg.role} 
                 content={msg.content} 
+                imageBase64={msg.imageBase64}
               />
             ))
           )}
@@ -97,9 +118,10 @@ export default function Home() {
           onInputChange={handleInputChange}
           onSubmit={handleSubmit}
           isLoading={isLoading}
+          isImageMode={isImageMode}
+          onImageModeToggle={() => setIsImageMode(!isImageMode)}
         />
       </div>
     </main>
   );
- }
-         
+}

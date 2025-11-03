@@ -38,10 +38,10 @@ export async function POST(req: Request) {
     const userPrompt = lastMessage.content;
 
     if (isImageMode) {
-      const imageModel = genAI.getGenerativeModel({
+      const response = await genAI.models.generateContent({
         model: "gemini-2.5-flash-image",
+        contents: userPrompt,
       });
-      const response = await imageModel.generateContent(userPrompt);
       
       for (const part of response.candidates[0].content.parts) {
         if (part.inlineData) { 

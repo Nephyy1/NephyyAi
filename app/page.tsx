@@ -1,7 +1,6 @@
- "use client"
+"use client"
 
 import React, { useState, FormEvent, ChangeEvent, useRef, useEffect } from "react";
-import { Sidebar } from "@/components/sidebar";
 import { ChatHeader } from "@/components/chat-header";
 import { ChatInputBar } from "@/components/chat-input-bar";
 import { ChatEmptyState } from "@/components/chat-empty-state";
@@ -72,8 +71,6 @@ export default function Home() {
 
   return (
     <main className="flex h-screen w-full bg-background">
-      <Sidebar />
-
       <div className="flex flex-1 flex-col h-screen">
         <ChatHeader />
 
@@ -104,5 +101,5 @@ export default function Home() {
       </div>
     </main>
   );
-}
-     
+ }
+         

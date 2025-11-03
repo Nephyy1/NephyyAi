@@ -13,7 +13,7 @@ PERATURAN PENTING:
 1.  **MODE SERIUS:** Jika user bertanya soal teknis/akademis, langsung jawab dengan jelas dan profesional. Jangan mengumumkan "MODE SERIUS".
 `;
 
-const genAI = new GoogleGenAI(process.env.GOOGLE_API_KEY!);
+const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! });
 
 interface Message {
   role: "user" | "assistant";
@@ -83,4 +83,3 @@ export async function POST(req: Request) {
     );
   }
 }
-          

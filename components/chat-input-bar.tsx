@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Paperclip, ArrowUp, Loader2 } from "lucide-react"
+import { ArrowUp, Loader2 } from "lucide-react"
 
 interface ChatInputBarProps {
   inputValue: string;
@@ -26,12 +26,11 @@ export function ChatInputBar({
         className="relative flex w-full max-w-4xl mx-auto items-center"
       >
         <div className="relative flex-1">
-          <Paperclip className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input 
             value={inputValue}
             onChange={onInputChange}
-            placeholder="Ketik pesan atau unggah file..."
-            className="w-full h-12 pl-12 pr-16 rounded-full shadow-input-light focus-visible:ring-1"
+            placeholder="Ketik pesan..."
+            className="w-full h-12 pl-4 pr-16 rounded-full shadow-input-light focus-visible:ring-1"
             autoComplete="off"
             disabled={isLoading}
           />
